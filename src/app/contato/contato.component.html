@@ -1,0 +1,149 @@
+<!--
+<div>
+  <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>Cadastro</h1>
+      </div>
+      <div>
+        <div class="ui-g-2 ui-fluid">
+          <label>Nome</label>
+          <input
+            pInputText
+            type="text"
+            name="nome"
+            ngModel
+            required
+            #nome="ngModel"
+          />
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-2 ui-fluid">
+            <label>Endereco</label>
+            <input
+              pInputText
+              type="text"
+              placeholder="Rua"
+              name="endereco"
+              ngModel
+              required
+            />
+          </div>
+          <div class="ui-g-1 ui-fluid">
+            <label>Numero</label>
+            <input pInputText type="number" name="numero" ngModel required />
+          </div>
+          <div class="ui-g-1 ui-fluid">
+            <label>Complemento</label>
+            <input pInputText type="text" name="complemento" ngModel />
+          </div>
+          <div class="ui-g-2 ui-fluid">
+            <label>Bairro</label>
+            <input pInputText type="text" name="bairro" ngModel required />
+          </div>
+          <div class="ui-g-1 ui-fluid">
+            <label>Telefone</label>
+            <input
+              pInputText
+              type="text"
+              maxlength="9"
+              minlength="8"
+              name="telefone"
+              ngModel
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <button
+        pButton
+        type="submit"
+        label="Click"
+        [disabled]="!usuarioForm.valid"
+      ></button>
+    </div>
+  </form>
+  <div></div>
+</div>
+-->
+
+<div>
+  <div class="ui-g">
+    <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
+      <div>
+        <div class="ui-g-2 ui-fluid">
+          <label>Nome</label>
+          <input
+            pInputText
+            type="text"
+            name="nome"
+            ngModel
+            required
+            #nome="ngModel"
+          />
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-2 ui-fluid">
+            <label>Endereco</label>
+            <input
+              pInputText
+              type="text"
+              placeholder="Rua"
+              name="endereco"
+              ngModel
+              required
+            />
+          </div>
+          <div class="ui-g-1 ui-fluid">
+            <label>Numero</label>
+            <input pInputText type="number" name="numero" ngModel required />
+          </div>
+          <div class="ui-g-2 ui-fluid">
+            <label>Complemento</label>
+            <input pInputText type="text" name="complemento" ngModel />
+          </div>
+          <div class="ui-g-2 ui-fluid">
+            <label>Bairro</label>
+            <input pInputText type="text" name="bairro" ngModel required />
+          </div>
+          <div class="ui-g-2 ui-fluid">
+            <label>Telefone</label>
+            <input
+              pInputText
+              type="text"
+              maxlength="10"
+              minlength="8"
+              name="telefone"
+              ngModel
+              required
+              placeholder="xxxxx-xxxx"
+            />
+          </div>
+          <button
+            pButton
+            type="button"
+            label="Adicionar"
+            [disabled]="!usuarioForm.valid"
+          ></button>
+        </div>
+      </div>
+    </form>
+    <p-table [value]="todos">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Nome</th>
+          <th>Endereco</th>
+          <th>Numero</th>
+          <th>Complemento</th>
+          <th>Bairro</th>
+          <th>Telefone</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-todos>
+        <tr>
+          <td>{{ todo.nome }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

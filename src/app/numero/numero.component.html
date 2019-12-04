@@ -1,0 +1,35 @@
+<p-toast [style]="{marginTop: '80px'}" position="top-right" key="tl"></p-toast>
+<p-toast [style]="{marginTop: '80px'}" position="top-right" key="tL"></p-toast>
+
+<div class="ui-g">
+  <div class="ui-g-2 ui-fluid">
+    <label>Nome</label>
+    <input pInputText type="text" [(ngModel)]="numeroTelefone.contatoNome" required />
+  </div>
+  <div class="ui-g-2 ui-fluid">
+    <label>Telefone</label>
+    <input pInputText type="text" [(ngModel)]="numeroTelefone.telefone" required />
+  </div>
+  <button pButton type="button" [label]="numeroTelefone != null && numeroTelefone.telefone ? 'Atualizar' : 'Adicionar'"
+    (click)="addNumero($event)"></button>
+</div>
+<p-table [value]="numero">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-numero>
+    <tr>
+      <td>{{ numero.contatoNome }}</td>
+      <td>{{ numero.telefone }}</td>
+      <td>
+        <button class="ui-button-danger" type="button" (click)="deleteNumero(numero)" pButton icon="pi pi-times" label="Delete"></button>
+      </td>
+      <td>
+        <button type="button" (click)="editNumero(numero)" pButton icon="pi pi-times" label="Update"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

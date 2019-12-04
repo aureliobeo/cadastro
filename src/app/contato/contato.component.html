@@ -1,105 +1,38 @@
-<!--
-<div>
-  <form #usuarioForm="ngForm" (ngSubmit)="salvar(usuarioForm)">
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <h1>Cadastro</h1>
-      </div>
-      <div>
-        <div class="ui-g-2 ui-fluid">
-          <label>Nome</label>
-          <input
-            pInputText
-            type="text"
-            name="nome"
-            ngModel
-            required
-            #nome="ngModel"
-          />
-        </div>
-        <div class="ui-g">
-          <div class="ui-g-2 ui-fluid">
-            <label>Endereco</label>
-            <input
-              pInputText
-              type="text"
-              placeholder="Rua"
-              name="endereco"
-              ngModel
-              required
-            />
-          </div>
-          <div class="ui-g-1 ui-fluid">
-            <label>Numero</label>
-            <input pInputText type="number" name="numero" ngModel required />
-          </div>
-          <div class="ui-g-1 ui-fluid">
-            <label>Complemento</label>
-            <input pInputText type="text" name="complemento" ngModel />
-          </div>
-          <div class="ui-g-2 ui-fluid">
-            <label>Bairro</label>
-            <input pInputText type="text" name="bairro" ngModel required />
-          </div>
-          <div class="ui-g-1 ui-fluid">
-            <label>Telefone</label>
-            <input
-              pInputText
-              type="text"
-              maxlength="9"
-              minlength="8"
-              name="telefone"
-              ngModel
-              required
-            />
-          </div>
-        </div>
-      </div>
-      <button
-        pButton
-        type="submit"
-        label="Click"
-        [disabled]="!usuarioForm.valid"
-      ></button>
-    </div>
-  </form>
-  <div></div>
-</div>
--->
+<p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+<p-toast [style]="{marginTop: '80px'}" position="top-right" key="tl"></p-toast>
+<p-toast [style]="{marginTop: '80px'}" position="top-right" key="tL"></p-toast>
+
+<p-dialog header="{{cadastroTelefone != null ? cadastroTelefone.nome : ''}}" [(visible)]="display" [modal]="true"
+  [responsive]="true" [style]="{width: '946px', minWidth: '200px'}" [minY]="70" [baseZIndex]="10000">
+  <app-numero [contato]="cadastroTelefone"></app-numero>
+</p-dialog>
 
 <div class="ui-g">
-  <div class="ui-g-2 ui-fluid">
-    <label>Nome</label>
-    <input pInputText type="text" [(ngModel)]="contato.nome" required />
-  </div>
-  <div class="ui-g-2 ui-fluid">
-    <label>Endereco</label>
-    <input pInputText type="text" [(ngModel)]="contato.endereco" required />
-  </div>
-  <div class="ui-g-1 ui-fluid">
-    <label>Numero</label>
-    <input pInputText type="number" [(ngModel)]="contato.numero" required />
-  </div>
-  <div class="ui-g-1 ui-fluid">
-    <label>Complemento</label>
-    <input pInputText type="text" [(ngModel)]="contato.complemento" />
-  </div>
-  <div class="ui-g-2 ui-fluid">
-    <label>Bairro</label>
-    <input pInputText type="text" [(ngModel)]="contato.bairro" required />
-  </div>
-  <div class="ui-g-1 ui-fluid">
-    <label>Telefone</label>
-    <input
-      pInputText
-      type="text"
-      maxlength="9"
-      minlength="8"
-      [(ngModel)]="contato.telefone"
-      required
-    />
-  </div>
-  <p-button label="Click" (onClick)="addCad($event)"></p-button>
+  <form #cadastroForm="ngForm">
+    <div class="ui-g-2 ui-fluid">
+      <label>Nome</label>
+      <input pInputText type="text" [(ngModel)]="contato.nome" name="nome" required />
+    </div>
+    <div class="ui-g-2 ui-fluid">
+      <label>Endereco</label>
+      <input pInputText type="text" [(ngModel)]="contato.endereco" name="endereco" required />
+    </div>
+    <div class="ui-g-1 ui-fluid">
+      <label>Numero</label>
+      <input pInputText type="number" [(ngModel)]="contato.numero" name="numero" />
+    </div>
+    <div class="ui-g-1 ui-fluid">
+      <label>Complemento</label>
+      <input pInputText type="text" [(ngModel)]="contato.complemento" name="complemento" />
+    </div>
+    <div class="ui-g-2 ui-fluid">
+      <label>Bairro</label>
+      <input pInputText type="text" [(ngModel)]="contato.bairro" name="bairro" />
+    </div>
+    <button pButton [label]="contato != null && contato.id ? 'Atualizar' : 'Adicionar'" (click)="addCad($event)"
+      [disabled]="!cadastroForm.valid">
+    </button>
+  </form>
   <p-table [value]="cadastro">
     <ng-template pTemplate="header">
       <tr>
@@ -108,7 +41,9 @@
         <th>Numero</th>
         <th>Complemento</th>
         <th>Bairro</th>
-        <th>Telefone</th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-cad>
@@ -118,7 +53,15 @@
         <td>{{ cad.numero }}</td>
         <td>{{ cad.complemento }}</td>
         <td>{{ cad.bairro }}</td>
-        <td>{{ cad.telefone }}</td>
+        <td>
+          <button class="ui-button-danger" type="button" (click)="deleteCad(cad)" pButton icon="pi pi-times" label="Delete"></button>
+        </td>
+        <td>
+          <button type="button" (click)="editCad(cad)" pButton icon="pi pi-check" label="Update"></button>
+        </td>
+        <td>
+          <button type="button" (click)="showCadastro(cad)" pButton label="Telefone"></button>
+        </td>
       </tr>
     </ng-template>
   </p-table>

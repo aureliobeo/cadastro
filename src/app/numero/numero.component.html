@@ -1,5 +1,5 @@
-<p-toast [style]="{marginTop: '80px'}" position="top-right" key="tl"></p-toast>
-<p-toast [style]="{marginTop: '80px'}" position="top-right" key="tL"></p-toast>
+<p-toast position="top-right" key="numeroExcluido"></p-toast>
+<p-toast position="top-right" key="numeroCriado"></p-toast>
 
 <div class="ui-g">
   <div class="ui-g-2 ui-fluid">
@@ -8,9 +8,9 @@
   </div>
   <div class="ui-g-2 ui-fluid">
     <label>Telefone</label>
-    <input pInputText type="text" [(ngModel)]="numeroTelefone.telefone" required />
+    <input pInputText type="number" [(ngModel)]="numeroTelefone.telefone" required />
   </div>
-  <button pButton type="button" [label]="numeroTelefone != null && numeroTelefone.telefone ? 'Atualizar' : 'Adicionar'"
+  <button pButton type="button" [label]="numeroTelefone != null && numeroTelefone.id ? 'Atualizar' : 'Adicionar'"
     (click)="addNumero($event)"></button>
 </div>
 <p-table [value]="numero">
@@ -18,6 +18,8 @@
     <tr>
       <th>Nome</th>
       <th>Telefone</th>
+      <th></th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-numero>

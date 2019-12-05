@@ -46,6 +46,7 @@ export class NumeroComponent implements OnInit, OnChanges {
       this.numeroService.updateTelefone(numero).subscribe(telefone => {
         this.pesquisaTelefone();
         this.numeroTelefone = new Numero();
+        this.messageService.add({ key: 'numeroCriado', severity: 'success', summary: 'Telefone atualizado com sucesso' });
       });
     } else {
       this.numeroService.addNumero(numero).subscribe(telefone => {
@@ -55,9 +56,9 @@ export class NumeroComponent implements OnInit, OnChanges {
           this.numeroTelefone = new Numero();
           this.numeroTelefone.telefone = '';
           this.numeroTelefone.contatoNome = '';
-          this.messageService.add({ key: 'tL', severity: 'success', summary: 'Numero criado com sucesso' });
+          this.messageService.add({ key: 'numeroCriado', severity: 'success', summary: 'Telefone criado com sucesso' });
         } else {
-          alert('Numero ja existe');
+          this.messageService.add({ key: 'numeroCriado', severity: 'warn', summary: 'Numero informado ja existe' });
         }
       });
     }
@@ -67,7 +68,7 @@ export class NumeroComponent implements OnInit, OnChanges {
     this.numero = this.numero.filter(numeroItem => {
       return numeroItem !== numero;
     });
-    this.messageService.add({ key: 'tl', severity: 'error', summary: 'Cadastro Apagado com sucesso' });
+    this.messageService.add({ key: 'numeroExcluido', severity: 'error', summary: 'Telefone excluido com sucesso' });
     this.numeroService.deleteTelefone(numero).subscribe();
   }
 

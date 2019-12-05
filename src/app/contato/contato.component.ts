@@ -41,6 +41,7 @@ export class ContatoComponent implements OnInit {
     if (cad.id) {
       this.cadService.updateCadastro(cad).subscribe(usuario => {
         this.pesquisar();
+        this.messageService.add({ key: 'tL', severity: 'success', summary: 'Cadastro atualizado com sucesso' });
         this.contato = new Contato();
       });
     } else {
@@ -56,7 +57,7 @@ export class ContatoComponent implements OnInit {
           this.contato.bairro = '';
           this.messageService.add({ key: 'tL', severity: 'success', summary: 'Cadastro criado com sucesso' });
         } else {
-          alert('Name already exist');
+          this.messageService.add({ key: 'tL', severity: 'warn', summary: 'Cadastro informado ja existe' });
         }
       });
     }
@@ -64,20 +65,17 @@ export class ContatoComponent implements OnInit {
 
   public deleteCad(cad) {
     this.confirmService.confirm({
-      message: 'Tem certeza de que quer continuar?',
-      header: 'Delete Confirmation',
+      message: 'Tem certeza de que quer excluir o contato?',
+      header: 'Excluir contato',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.message = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
         this.cadastro = this.cadastro.filter(cadItem => {
           return cadItem !== cad;
         });
-        this.messageService.add({ key: 'tl', severity: 'error', summary: 'Cadastro Apagado com sucesso' });
+        this.messageService.add({ key: 'tl', severity: 'error', summary: 'Contato excluido com sucesso' });
         this.cadService.deleteCadastro(cad).subscribe();
       },
-      reject: () => {
-        this.message = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
-      }
+      reject: () => { }
     });
   }
 
